@@ -20,10 +20,6 @@
     },
     "homepage": "https://github.com/andrehrf/organized",
     "dependencies": {
-        "async": "^1.5.2",
-        "require-directory": "^2.1.1",
-        
-        "optimist": "*",
-        "express": "*"
+        "require-directory": "^2.1.1"
     }
 }

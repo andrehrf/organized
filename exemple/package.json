@@ -1,0 +1,10 @@
+{
+    "name": "organized-exemple",
+    "version": "0.0.1",
+    "description": "Organizer and optimizer Node.js applications using AMD and Require.js concepts",
+    "author": "André Ferreira <andrehrf@gmail.com>",
+    "dependencies": {        
+        "optimist": "*",
+        "express": "*"
+    }
+}
