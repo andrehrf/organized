@@ -59,12 +59,14 @@ To set the directory to map all scripts will automatically load
 controllers/routes.js
 ```js
 module.exports = function(dirname, app){
-    app.get("/", function(req, res){ res.sendFile(`${dirname}/public/index.html`); });
+    app.get("/", function(req, res){ 
+        res.sendFile(`${dirname}/public/index.html`); 
+    });
 };
 ```
 
 public/index.html
-```js
+```html
 <!DOCTYPE html>
 <html>
     <head>
