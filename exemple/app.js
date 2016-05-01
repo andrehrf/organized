@@ -5,7 +5,7 @@
 
 'use strict';
 
-const app = require("./index.js");
+const app = require("../index.js");
 
 app.config({//Defining directory self loading scripts
     modules: {
