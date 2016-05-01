@@ -1,0 +1,29 @@
+{
+    "name": "organized",
+    "version": "0.0.1",
+    "description": "Organizer and optimizer Node.js applications using AMD and Require.js concepts",
+    "author": "André Ferreira <andrehrf@gmail.com>",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andrehrf/organized"
+    },
+    "keywords": [
+        "organize",
+        "optimize",
+        "AMD",
+        "require.js"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/andrehrf/organized/issues"
+    },
+    "homepage": "https://github.com/andrehrf/organized",
+    "dependencies": {
+        "async": "^1.5.2",
+        "require-directory": "^2.1.1",
+        
+        "optimist": "*",
+        "express": "*"
+    }
+}
