@@ -1,17 +1,26 @@
 'use strict';
 
-const rd = require("require-directory");
+const path = require("path"),
+      rd = require("require-directory"),
+      gulp = require('gulp'),
+      sourcemaps = require('gulp-sourcemaps'),
+      babel = require('gulp-babel'),
+      concat = require('gulp-concat'),
+      minify = require('gulp-minify'); 
 
 class Organized {
     constructor() {
         this.args = {};
+        this.stgs = {};
     }
     
     set(key, value){
         this.args[key] = value;
     }
     
-    config(stg = {}){        
+    config(stg = {}){     
+        this.stgs = stg;
+        
         if(typeof stg.modules === "object"){
             for(let key in stg.modules)
                 this.args[key] = require(stg.modules[key]);  
@@ -59,6 +68,31 @@ class Organized {
                 argsArr.push(this.args[dependences[keyArgs]]);
             
             onload.apply(this, argsArr);
+        }
+    }
+    
+    build(arr, dir){
+        if(typeof arr === "object"){
+            arr.forEach(function(map){
+                var base = path.basename(map.replace("/*.js", ""));
+                
+                if(base.indexOf(".") > 0)
+                    base = "";
+                
+                gulp.src(map)
+                    .pipe(sourcemaps.init())
+                    .pipe(babel({presets: ['es2015']}))
+                    .pipe(minify({
+                        ext:{
+                            src:'-debug.js',
+                            min:'.js'
+                        },
+                        exclude: ['tasks'],
+                        ignoreFiles: ['-min.js', 'build.js']
+                    }))
+                    .pipe(sourcemaps.write('.'))
+                    .pipe(gulp.dest(`${dir}/${base}`));
+            });
         }
     }
 }
