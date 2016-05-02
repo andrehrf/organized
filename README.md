@@ -80,6 +80,15 @@ public/index.html
 </html>
 ```
 
+## Build
+
+The build function will standardize the codes using Babel ES2015, then will minifier files
+
+```js
+const app = require("organized");
+app.build([`${__dirname}/controllers/*.js`, "app.js"], `build`);
+```
+
 ## Starting application
 
 Organizer uses Javascript ES6 so the --harmony parameter if Node.js is less than version 6 is required
