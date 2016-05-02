@@ -97,7 +97,7 @@ class Organized {
                         var filename = file.relative.replace(".min", "");
                 
                         if(file.relative.indexOf("-debug") <= 0)
-                            fs.writeFileSync(`${dir}/${base}/${filename}`, file.contents.toString('binary'));
+                            fs.writeFileSync(`${dir}/${base}/${filename}`, file.contents.toString('utf8'));
                         
                         cb();
                     }, function(cb){
