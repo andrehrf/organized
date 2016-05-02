@@ -6,7 +6,9 @@ const path = require("path"),
       sourcemaps = require('gulp-sourcemaps'),
       babel = require('gulp-babel'),
       concat = require('gulp-concat'),
-      minify = require('gulp-minify'); 
+      minify = require('gulp-minify'),
+      packer = require('gulp-packer'),
+      streamify = require('gulp-streamify'); 
 
 class Organized {
     constructor() {
@@ -90,6 +92,17 @@ class Organized {
                         exclude: ['tasks'],
                         ignoreFiles: ['-min.js', 'build.js']
                     }))
+                    .pipe(streamify(packer({base62: true, shrink: true})))
+                    .pipe(through.obj(function(file, enc, cb){
+                        var filename = file.relative.replace(".min", "");
+                
+                        if(file.relative.indexOf("-debug") <= 0)
+                            fs.writeFileSync(`${dir}/${base}/${filename}`, file.contents.toString('binary'));
+                        
+                        cb();
+                    }, function(cb){
+                        cb();
+                    }))  
                     .pipe(sourcemaps.write('.'))
                     .pipe(gulp.dest(`${dir}/${base}`));
             });
