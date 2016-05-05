@@ -1,14 +1,16 @@
 'use strict';
 
-const path = require("path"),
-      rd = require("require-directory"),
+const fs = require('fs'),
+      path = require('path'),
+      rd = require('require-directory'),
       gulp = require('gulp'),
       sourcemaps = require('gulp-sourcemaps'),
       babel = require('gulp-babel'),
       concat = require('gulp-concat'),
       minify = require('gulp-minify'),
       packer = require('gulp-packer'),
-      streamify = require('gulp-streamify'); 
+      streamify = require('gulp-streamify'),
+      through = require('through2'); 
 
 class Organized {
     constructor() {

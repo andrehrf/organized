@@ -6,4 +6,4 @@
 'use strict';
 
 const app = require("../index.js");
-app.build([`${__dirname}/controllers/*.js`, "app.js"], `build`);
+app.build([`${__dirname}/controllers/*.js`, "app.js"], `${__dirname}/build`);
