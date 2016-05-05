@@ -32,12 +32,12 @@ app.config({
     map_args: ["dirname", "app"]//Arguments that will be passed to the scripts
 });
 
-app.init(["app", "argv", "cluster", "express"], function(app, argv, cluster, express){
+app.init(["app", "argv", "cluster", "express"], (app, argv, cluster, express) => {
     if(cluster.isMaster){//Create cluster
         for(var i = 0; i < require('os').cpus().length; i++)
             cluster.fork();
 
-        cluster.on('exit', function *(worker){
+        cluster.on('exit', (worker) => {
             console.log(`Worker ${worker.id} died :(`);
             cluster.fork();
         });
@@ -45,7 +45,7 @@ app.init(["app", "argv", "cluster", "express"], function(app, argv, cluster, exp
     else{//Start Express Server
         const port = (typeof argv.port === "number") ? argv.port : 3000;
         app.use(express.static("public", {maxage: "2h"}));
-        app.listen(port, function(){
+        app.listen(port, () => {
             console.log(`Example app listening on port ${port}!`);
         });
     }
@@ -58,8 +58,8 @@ To set the directory to map all scripts will automatically load
 
 controllers/routes.js
 ```js
-module.exports = function(dirname, app){
-    app.get("/", function(req, res){ 
+module.exports = (dirname, app) => {
+    app.get("/", (req, res) => { 
         res.sendFile(`${dirname}/public/index.html`); 
     });
 };
