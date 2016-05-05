@@ -1,3 +1,8 @@
+/**
+ * Organized module application
+ * @author André Ferreira <andrehrf@gmail.com>
+ */
+
 'use strict';
 
 const fs = require('fs'),
@@ -13,15 +18,30 @@ const fs = require('fs'),
       through = require('through2'); 
 
 class Organized {
+    /**
+     * Contructor function
+     * @return void
+     */
     constructor() {
         this.args = {};
         this.stgs = {};
     }
     
+    /**
+     * Function to set virtual variable
+     * @param string key
+     * @param mixed value
+     * @return void
+     */
     set(key, value){
         this.args[key] = value;
     }
     
+    /**
+     * Setting function
+     * @param object stg
+     * @return void
+     */
     config(stg = {}){     
         this.stgs = stg;
         
@@ -64,6 +84,12 @@ class Organized {
         }
     }
     
+    /**
+     * Function to bootstrap application
+     * @param array dependences
+     * @param function onload
+     * @return void
+     */
     init(dependences = [], onload){       
         if(typeof onload === "function"){
             var argsArr = [];
@@ -75,9 +101,15 @@ class Organized {
         }
     }
     
+    /**
+     * Function to build files
+     * @param array arr
+     * @param dir string
+     * @return void
+     */
     build(arr, dir){
         if(typeof arr === "object"){
-            arr.forEach(function(map){
+            arr.forEach((map) => {
                 var base = path.basename(map.replace("/*.js", ""));
                 
                 if(base.indexOf(".") > 0)
@@ -95,14 +127,14 @@ class Organized {
                         ignoreFiles: ['-min.js', 'build.js']
                     }))
                     .pipe(streamify(packer({base62: true, shrink: true})))
-                    .pipe(through.obj(function(file, enc, cb){
+                    .pipe(through.obj((file, enc, cb) => {
                         var filename = file.relative.replace(".min", "");
                 
                         if(file.relative.indexOf("-debug") <= 0)
                             fs.writeFileSync(`${dir}/${base}/${filename}`, file.contents.toString('utf8'));
                         
                         cb();
-                    }, function(cb){
+                    }, (cb) => {
                         cb();
                     }))  
                     .pipe(sourcemaps.write('.'))

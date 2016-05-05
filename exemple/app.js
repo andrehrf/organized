@@ -22,12 +22,12 @@ app.config({//Defining directory self loading scripts
     map_args: ["dirname", "app"]
 });
 
-app.init(["app", "argv", "cluster", "express"], function(app, argv, cluster, express){
+app.init(["app", "argv", "cluster", "express"], (app, argv, cluster, express) => {
     if(cluster.isMaster){//Create cluster
         for(var i = 0; i < require('os').cpus().length; i++)
             cluster.fork();
 
-        cluster.on('exit', function *(worker){
+        cluster.on('exit', (worker) => {
             console.log(`Worker ${worker.id} died :(`);
             cluster.fork();
         });
@@ -35,7 +35,7 @@ app.init(["app", "argv", "cluster", "express"], function(app, argv, cluster, exp
     else{
         const port = (typeof argv.port === "number") ? argv.port : 3000;
         app.use(express.static("public", {maxage: "2h"}));
-        app.listen(port, function(){
+        app.listen(port, () => {
             console.log(`Example app listening on port ${port}!`);
         });
     }
