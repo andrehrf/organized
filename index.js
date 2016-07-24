@@ -7,15 +7,7 @@
 
 const fs = require('fs'),
       path = require('path'),
-      rd = require('require-directory'),
-      gulp = require('gulp'),
-      sourcemaps = require('gulp-sourcemaps'),
-      babel = require('gulp-babel'),
-      concat = require('gulp-concat'),
-      minify = require('gulp-minify'),
-      packer = require('gulp-packer'),
-      streamify = require('gulp-streamify'),
-      through = require('through2'); 
+      rd = require('require-directory'); 
 
 class Organized {
     /**
@@ -77,7 +69,8 @@ class Organized {
             for(let key in stg.map){
                 rd(module, stg.map[key]+"/", {
                     visit: function(obj){ 
-                        obj.apply(this, argsArr);
+                        if(typeof obj === "object")
+                            obj.apply(this, argsArr);
                     } 
                 });
             }
@@ -98,48 +91,6 @@ class Organized {
                 argsArr.push(this.args[dependences[keyArgs]]);
             
             onload.apply(this, argsArr);
-        }
-    }
-    
-    /**
-     * Function to build files
-     * @param array arr
-     * @param dir string
-     * @return void
-     */
-    build(arr, dir){
-        if(typeof arr === "object"){
-            arr.forEach((map) => {
-                var base = path.basename(map.replace("/*.js", ""));
-                
-                if(base.indexOf(".") > 0)
-                    base = "";
-                
-                gulp.src(map)
-                    .pipe(sourcemaps.init())
-                    .pipe(babel({presets: ['es2015']}))
-                    .pipe(minify({
-                        ext:{
-                            src:'-debug.js',
-                            min:'.js'
-                        },
-                        exclude: ['tasks'],
-                        ignoreFiles: ['-min.js', 'build.js']
-                    }))
-                    .pipe(streamify(packer({base62: true, shrink: true})))
-                    .pipe(through.obj((file, enc, cb) => {
-                        var filename = file.relative.replace(".min", "");
-                
-                        if(file.relative.indexOf("-debug") <= 0)
-                            fs.writeFileSync(`${dir}/${base}/${filename}`, file.contents.toString('utf8'));
-                        
-                        cb();
-                    }, (cb) => {
-                        cb();
-                    }))  
-                    .pipe(sourcemaps.write('.'))
-                    .pipe(gulp.dest(`${dir}/${base}`));
-            });
         }
     }
 }
