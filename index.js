@@ -78,7 +78,7 @@ class Organized {
                 else{
                     var obj = module.require(stg.map[key]);
                     
-                    if(typeof obj === "object")
+                    if(typeof obj === "function")
                         obj.apply(this, argsArr);
                 }
             }
