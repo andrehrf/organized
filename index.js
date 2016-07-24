@@ -76,7 +76,7 @@ class Organized {
                     });
                 }
                 else{
-                    require(stg.map[key])(argsArr);
+                    require(stg.map[key]).apply(argsArr);
                 }
             }
         }
