@@ -76,10 +76,10 @@ class Organized {
                     });
                 }
                 else{
-                    var obj = require(stg.map[key]);
+                    var obj = module.require(stg.map[key]);
                     
                     if(typeof obj === "object")
-                        obj.apply(argsArr);
+                        obj.apply(this, argsArr);
                 }
             }
         }
