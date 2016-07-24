@@ -67,12 +67,17 @@ class Organized {
                 argsArr.push(this.args[stg.map_args[keyArgs]]);
             
             for(let key in stg.map){
-                rd(module, stg.map[key]+"/", {
-                    visit: function(obj){ 
-                        if(typeof obj === "object")
-                            obj.apply(this, argsArr);
-                    } 
-                });
+                if(fs.lstatSync(stg.map[key]).isDirectory()){
+                    rd(module, stg.map[key]+"/", {
+                        visit: function(obj){ 
+                            if(typeof obj === "object")
+                                obj.apply(this, argsArr);
+                        } 
+                    });
+                }
+                else{
+                    require(stg.map[key])(argsArr);
+                }
             }
         }
     }
