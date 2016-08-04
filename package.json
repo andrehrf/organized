@@ -1,6 +1,6 @@
 {
     "name": "organized",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "description": "Organizer and optimizer Node.js applications using AMD and Require.js concepts",
     "author": "André Ferreira <andrehrf@gmail.com>",
     "main": "index.js",
