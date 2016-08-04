@@ -60,6 +60,9 @@ class Organized {
             }
         } 
         
+        if(typeof stg.onload === "function")            
+            stg.onload.apply(this, this.args);
+                
         if(typeof stg.map === "object"){
             var argsArr = [];
 
