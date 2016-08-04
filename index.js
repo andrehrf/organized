@@ -60,8 +60,14 @@ class Organized {
             }
         } 
         
-        if(typeof stg.onload === "function")            
-            stg.onload.apply(this, this.args);
+        if(typeof stg.preload === "function"){
+            var argsArr = [];
+
+            for(let keyArgs in stg.preload_args)
+                argsArr.push(this.args[stg.preload_args[keyArgs]]);
+            
+            stg.preload.apply(this, argsArr);
+        }     
                 
         if(typeof stg.map === "object"){
             var argsArr = [];
