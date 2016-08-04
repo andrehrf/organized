@@ -79,7 +79,7 @@ class Organized {
                 if(fs.lstatSync(stg.map[key]).isDirectory()){
                     rd(module, stg.map[key]+"/", {
                         visit: function(obj){ 
-                            if(typeof obj === "object")
+                            if(typeof obj === "function")
                                 obj.apply(this, argsArr);
                         } 
                     });
