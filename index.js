@@ -37,12 +37,20 @@ class Organized {
     config(stg = {}){     
         this.stgs = stg;
         
+        //Loading modules
         if(typeof stg.modules === "object"){
+            if(stgs.dev)
+                console.info("Organized: loading modules");
+            
             for(let key in stg.modules)
                 this.args[key] = require(stg.modules[key]);  
         }  
                 
+        //Settings virtual services
         if(typeof stg.virtual === "object"){
+            if(stgs.dev)
+                console.info("Organized: settings virtual services");
+            
             var names = "";
             var argsArr = [];
                         
@@ -60,7 +68,11 @@ class Organized {
             }
         } 
         
+        //Preload settings
         if(typeof stg.preload === "function"){
+            if(stgs.dev)
+                console.info("Organized: preload settings");
+            
             var argsArr = [];
 
             for(let keyArgs in stg.preload_args)
@@ -68,9 +80,13 @@ class Organized {
             
             stg.preload.apply(this, argsArr);
         }     
-                
+            
+        //Mapping controllers diretories
         if(typeof stg.map === "object"){
-            var argsArr = [];
+            if(stgs.dev)
+                console.info("Organized: mapping controllers diretories");
+            
+            let argsArr = [];
 
             for(let keyArgs in stg.map_args)
                 argsArr.push(this.args[stg.map_args[keyArgs]]);
@@ -91,6 +107,19 @@ class Organized {
                         obj.apply(this, argsArr);
                 }
             }
+        }
+        
+        //Bootstrap application
+        if(typeof stg.bootstrap === "function"){
+            if(stgs.dev)
+                console.info("Organized: bootstrap application");
+            
+            let argsArr = [];
+
+            for(let keyArgs in stg.bootstrap_args)
+                argsArr.push(this.args[stg.bootstrap_args[keyArgs]]);
+            
+            stg.bootstrap.apply(this, argsArr);
         }
     }
     

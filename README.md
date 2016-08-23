@@ -1,6 +1,6 @@
 # Organized
 
-Organizer and optimizer Node.js applications using AMD and Require.js concepts and use modules Babel, Gulp, Minify, of standardizes the application ES2015 in future implementations will generate files with compatible mobile ASM.js and WebAssembly
+Organizer and optimizer Node.js applications using AMD and Require.js concepts
 
 ## Install
 
