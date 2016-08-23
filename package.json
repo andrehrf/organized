@@ -1,6 +1,6 @@
 {
     "name": "organized",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "Organizer and optimizer Node.js applications using AMD and Require.js concepts",
     "author": "André Ferreira <andrehrf@gmail.com>",
     "main": "index.js",
@@ -20,6 +20,7 @@
     },
     "homepage": "https://github.com/andrehrf/organized",
     "dependencies": {
-        "require-directory": "^2.1.1"
+        "require-directory": "^2.1.1",
+        "alwaysalive": "*"
     }
 }

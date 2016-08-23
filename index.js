@@ -7,7 +7,8 @@
 
 const fs = require('fs'),
       path = require('path'),
-      rd = require('require-directory'); 
+      rd = require('require-directory'),
+      alwaysalive = require("alwaysalive"); 
 
 class Organized {
     /**
@@ -93,18 +94,33 @@ class Organized {
             
             for(let key in stg.map){
                 if(fs.lstatSync(stg.map[key]).isDirectory()){
-                    rd(module, stg.map[key]+"/", {
+                    alwaysalive.watch(stg.map[key]+"/*", {ignored: /[\/\\]\./, persistent: true}, false, (event, path) => {
+                        if(stg.dev)
+                            console.info("Organized: loading " + path);
+                            
+                        var obj = module.require(path);
+                    
+                        if(typeof obj === "function")
+                            obj.apply(this, argsArr);
+                    });
+                    
+                    /*rd(module, stg.map[key]+"/", {
                         visit: function(obj){ 
                             if(typeof obj === "function")
                                 obj.apply(this, argsArr);
                         } 
-                    });
+                    });*/
                 }
                 else{
-                    var obj = module.require(stg.map[key]);
+                    alwaysalive.watch(stg.map[key], {ignored: /[\/\\]\./, persistent: true}, false, (event, path) => {
+                        if(stg.dev)
+                            console.info("Organized: loading " + path);
+                        
+                        var obj = module.require(path);
                     
-                    if(typeof obj === "function")
-                        obj.apply(this, argsArr);
+                        if(typeof obj === "function")
+                            obj.apply(this, argsArr);
+                    });
                 }
             }
         }
