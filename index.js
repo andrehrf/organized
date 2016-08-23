@@ -39,7 +39,7 @@ class Organized {
         
         //Loading modules
         if(typeof stg.modules === "object"){
-            if(stgs.dev)
+            if(stg.dev)
                 console.info("Organized: loading modules");
             
             for(let key in stg.modules)
@@ -48,7 +48,7 @@ class Organized {
                 
         //Settings virtual services
         if(typeof stg.virtual === "object"){
-            if(stgs.dev)
+            if(stg.dev)
                 console.info("Organized: settings virtual services");
             
             var names = "";
@@ -70,7 +70,7 @@ class Organized {
         
         //Preload settings
         if(typeof stg.preload === "function"){
-            if(stgs.dev)
+            if(stg.dev)
                 console.info("Organized: preload settings");
             
             var argsArr = [];
@@ -83,7 +83,7 @@ class Organized {
             
         //Mapping controllers diretories
         if(typeof stg.map === "object"){
-            if(stgs.dev)
+            if(stg.dev)
                 console.info("Organized: mapping controllers diretories");
             
             let argsArr = [];
@@ -111,7 +111,7 @@ class Organized {
         
         //Bootstrap application
         if(typeof stg.bootstrap === "function"){
-            if(stgs.dev)
+            if(stg.dev)
                 console.info("Organized: bootstrap application");
             
             let argsArr = [];
