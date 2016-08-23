@@ -87,14 +87,16 @@ class Organized {
             if(stg.dev)
                 console.info("Organized: mapping controllers diretories");
             
-            let argsArr = [];
-
-            for(let keyArgs in stg.map_args)
-                argsArr.push(this.args[stg.map_args[keyArgs]]);
+            let _this = this;
             
             for(let key in stg.map){
                 if(fs.lstatSync(stg.map[key]).isDirectory()){
                     alwaysalive.watch(stg.map[key]+"/*", {ignored: /[\/\\]\./, persistent: true}, false, (event, path) => {
+                        let argsArr = [];
+
+                        for(let keyArgs in _this.stgs.map_args)
+                            argsArr.push(_this.args[_this.stgs.map_args[keyArgs]]);
+            
                         if(stg.dev)
                             console.info("Organized: loading " + path);
                             
@@ -103,16 +105,14 @@ class Organized {
                         if(typeof obj === "function")
                             obj.apply(this, argsArr);
                     });
-                    
-                    /*rd(module, stg.map[key]+"/", {
-                        visit: function(obj){ 
-                            if(typeof obj === "function")
-                                obj.apply(this, argsArr);
-                        } 
-                    });*/
                 }
                 else{
                     alwaysalive.watch(stg.map[key], {ignored: /[\/\\]\./, persistent: true}, false, (event, path) => {
+                        let argsArr = [];
+
+                        for(let keyArgs in _this.stgs.map_args)
+                            argsArr.push(_this.args[_this.stgs.map_args[keyArgs]]);
+                        
                         if(stg.dev)
                             console.info("Organized: loading " + path);
                         
