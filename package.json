@@ -1,6 +1,6 @@
 {
     "name": "organized",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "description": "Organizer and optimizer Node.js applications using AMD and Require.js concepts",
     "author": "André Ferreira <andrehrf@gmail.com>",
     "main": "index.js",
@@ -37,7 +37,7 @@
         "passport-local": "^1.0.0",
         "lodash": "^4.6.1",
         "mongodb": "^2.1.4",
-        "mongoskin": "^2.1.0",,
+        "mongoskin": "^2.1.0",
         "crc-32": "^0.3.0",
         "md5": "^2.0.0",
         "moment": "^2.13.0",

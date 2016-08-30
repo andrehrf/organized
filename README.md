@@ -85,7 +85,7 @@ else{
 
                 app.set('views', __dirname + '/public');
                 app.set('view engine', 'ejs');
-                app.use(i18n.init); 
+                //app.use(i18n.init); 
                 //app.use(require('compression')());
                 app.use(require('serve-static')(__dirname + '/public'));
                 app.use(require('cookie-parser')());
