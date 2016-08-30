@@ -99,7 +99,7 @@ class Organized {
                             argsArr.push(_this.args[_this.stgs.map_args[keyArgs]]);
             
                         if(stg.dev)
-                            console.info("Organized: loading " + path);
+                            console.info("Organized: loading " + filename);
                             
                         delete require.cache[path.resolve(filename)];
                         var obj = module.require(filename);

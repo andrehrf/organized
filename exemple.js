@@ -1,18 +1,8 @@
-# Organized
+/**
+ * Main File Application
+ * @author André Ferreira <andrehrf@gmail.com>
+ */
 
-Organizer and optimizer Node.js applications using AMD and Require.js concepts
-
-## Install
-
-```bash
-$ npm install organized
-```
-
-## Usage
-
-Set bootstrap
-
-```js
 "use strict";
 
 let fs = require("fs"),
@@ -166,58 +156,5 @@ else{
         });
     }, null);
 }
-```
-
-## Create controller
-
-To set the directory to map all scripts will automatically load
-
-controllers/routes.js
-```js
-module.exports = (settings, dirname, argv, app, passport, mongodb) => {
-    app.get("/", (req, res) => { 
-        res.sendFile(`${dirname}/public/index.html`); 
-    });
-};
-```
-
-public/index.html
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Hello World</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>Hello World</div>
-    </body>
-</html>
-```
-
-## Starting application
-
-Organizer uses Javascript ES6 so the --harmony parameter if Node.js is less than version 6 is required
-
-Node.js 6
-```bash
-$ node app.js
-```
-
-Node.js other versions
-```bash
-$ node --harmony app.js
-```
-
-## License
-
-  MIT
-  
-  Copyright (C) 2016 André Ferreira
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+      
+      
