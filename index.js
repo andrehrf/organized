@@ -7,7 +7,8 @@
 
 const fs = require('fs'),
       path = require('path'),
-      alwaysalive = require("alwaysalive"); 
+      chokidar = require('chokidar');
+      //alwaysalive = require("alwaysalive"); 
 
 class Organized {
     /**
@@ -92,7 +93,9 @@ class Organized {
             
             for(let key in stg.map){
                 if(fs.lstatSync(stg.map[key]).isDirectory()){
-                    alwaysalive.watch(stg.map[key]+"/*", {ignored: /[\/\\]\./, persistent: true}, false, (event, filename) => {
+                    let watcher = chokidar.watch(stg.map[key] + "/*", {ignored: /[\/\\]\./, persistent: true});
+        
+                    watcher.on('ready', (event, filename) => {
                         let argsArr = [];
 
                         for(let keyArgs in _this.stgs.map_args)
@@ -107,9 +110,27 @@ class Organized {
                         if(typeof obj === "function")
                             obj.apply(this, argsArr);
                     });
+                    
+                    /*alwaysalive.watch(stg.map[key]+"/*", {ignored: /[\/\\]\./, persistent: true}, false, (event, filename) => {
+                        let argsArr = [];
+
+                        for(let keyArgs in _this.stgs.map_args)
+                            argsArr.push(_this.args[_this.stgs.map_args[keyArgs]]);
+            
+                        if(stg.dev)
+                            console.info("Organized: loading " + filename);
+                            
+                        delete require.cache[path.resolve(filename)];
+                        var obj = module.require(filename);
+                    
+                        if(typeof obj === "function")
+                            obj.apply(this, argsArr);
+                    });*/
                 }
                 else{
-                    alwaysalive.watch(stg.map[key], {ignored: /[\/\\]\./, persistent: true}, false, (event, filename) => {
+                    let watcher = chokidar.watch(stg.map[key], {ignored: /[\/\\]\./, persistent: true});
+        
+                    watcher.on('ready', (event, filename) => {
                         let argsArr = [];
 
                         for(let keyArgs in _this.stgs.map_args)
@@ -124,6 +145,22 @@ class Organized {
                         if(typeof obj === "function")
                             obj.apply(this, argsArr);
                     });
+                    
+                    /*alwaysalive.watch(stg.map[key], {ignored: /[\/\\]\./, persistent: true}, false, (event, filename) => {
+                        let argsArr = [];
+
+                        for(let keyArgs in _this.stgs.map_args)
+                            argsArr.push(_this.args[_this.stgs.map_args[keyArgs]]);
+                        
+                        if(stg.dev)
+                            console.info("Organized: loading " + filename);
+                        
+                        delete require.cache[path.resolve(filename)];
+                        var obj = module.require(filename);
+                    
+                        if(typeof obj === "function")
+                            obj.apply(this, argsArr);
+                    });*/
                 }
             }
         }
