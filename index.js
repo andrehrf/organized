@@ -95,7 +95,7 @@ class Organized {
                 if(fs.lstatSync(stg.map[key]).isDirectory()){
                     let watcher = chokidar.watch(stg.map[key] + "/*", {ignored: /[\/\\]\./, persistent: true});
         
-                    watcher.on('ready', (event, filename) => {
+                    watcher.on('add', (event, filename) => {
                         let argsArr = [];
 
                         for(let keyArgs in _this.stgs.map_args)
@@ -130,7 +130,7 @@ class Organized {
                 else{
                     let watcher = chokidar.watch(stg.map[key], {ignored: /[\/\\]\./, persistent: true});
         
-                    watcher.on('ready', (event, filename) => {
+                    watcher.on('add', (event, filename) => {
                         let argsArr = [];
 
                         for(let keyArgs in _this.stgs.map_args)
