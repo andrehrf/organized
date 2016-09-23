@@ -104,7 +104,7 @@ class Organized {
                         if(stg.dev)
                             console.info("Organized: loading " + filename);
                             
-                        delete require.cache[path.resolve(filename)];
+                        //delete require.cache[path.resolve(filename)];
                         var obj = module.require(filename);
                     
                         if(typeof obj === "function")
@@ -139,7 +139,7 @@ class Organized {
                         if(stg.dev)
                             console.info("Organized: loading " + filename);
                         
-                        delete require.cache[path.resolve(filename)];
+                        //delete require.cache[path.resolve(filename)];
                         var obj = module.require(filename);
                     
                         if(typeof obj === "function")
