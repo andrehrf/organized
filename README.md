@@ -1,5 +1,8 @@
 # Organized
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/andrehrf/organized/master/LICENSE)
+[![npm version](https://badge.fury.io/js/organized.svg)](https://badge.fury.io/js/organized)
+
 Organizer and optimizer Node.js applications using AMD and Require.js concepts
 
 ## Install
@@ -163,7 +166,7 @@ module.exports = (settings, dirname, argv, app, passport, mongodb) => {
 };
 ```
 
-public/index.html
+public/index.ejs
 ```html
 <!DOCTYPE html>
 <html>
