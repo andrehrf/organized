@@ -53,7 +53,7 @@ define({
 
         return true;
     }],
-    map: [`${__dirname}/src`], //Mapping controllers diretory
+    map: [`${__dirname}/src/*.js`], //Mapping controllers diretory
     scope: (app, provider, services, mongodb) => { 
         app.listen(process.env.PORT || 8080, () => {
             console.log("server on");
