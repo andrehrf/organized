@@ -60,10 +60,10 @@ class Organized {
                     if(fn.toString().length > 0){
                         var dependencesFn = [], lack = [];
                         
-                        if(/.*?function\s*?\(.*?\).*?/i.test(fn.toString()))
-                            var funcArgs = fn.toString().match(/.*?function\s*?\((.*?)\).*?/i)[1].toString().split(",");
-                        else if(/.*?\(.*?\)\s*?=>\s*?{.*?/i.test(fn.toString()))
-                            var funcArgs = fn.toString().match(/.*?\((.*?)\)\s*?=>\s*?{.*?/i)[1].toString().split(",");
+                        if(/.*?function\s*?\(.*?\).*?/i.test(fn.toString().split("\n")[0]))
+                            var funcArgs = fn.toString().split("\n")[0].match(/.*?function\s*?\((.*?)\).*?/i)[1].split(",");
+                        else if(/.*?\(.*?\)\s*?=>\s*?{.*?/i.test(fn.toString().split("\n")[0]))
+                            var funcArgs = fn.toString().split("\n")[0].match(/.*?\((.*?)\)\s*?=>\s*?{.*?/i)[1].split(",");
                                       
                         if(funcArgs){
                             for(var key in funcArgs){//Fix spaces
